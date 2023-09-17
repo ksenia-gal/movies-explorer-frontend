@@ -1,0 +1,52 @@
+.content{
+  width: 100%;
+  box-sizing: border-box;
+  color: #000;
+}
+
+.content__section{
+  box-sizing: border-box;
+  padding: 110px 70px;
+}
+
+.content__title{
+  font-weight: 400;
+  font-size: 22px;
+  line-height: normal;
+  margin: 0;
+  padding: 0 0 23px;
+  border-bottom: 1px solid #000;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px){
+  .content__section{
+    padding: 110px 20px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .content__section{
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .content__section{
+    padding: 70px 0;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .content__section{
+    padding: 70px 18px 69px;
+  }
+
+  .content__title{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    padding: 0 0 28px;
+  }
+}
