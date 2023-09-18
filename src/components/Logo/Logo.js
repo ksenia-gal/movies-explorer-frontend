@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 function Logo() {
   
   return (
-    <Link to='/' className='logo'>
+    <div className='logo'>
+    <Link to='/' className='logo__link'>
       <img className='logo__icon' src={logo} alt='Логотип приложения Movies' />
     </Link>
+    </div>
   );
 };
   

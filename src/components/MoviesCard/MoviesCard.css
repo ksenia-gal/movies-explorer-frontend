@@ -3,7 +3,7 @@
   max-height: 271px;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #fdfdfd;
+  background-color: #FFF;
   color: #000;
   display: flex;
   position: relative;
@@ -46,6 +46,8 @@
   font-size: 11px;
   text-align: center;
   color: #a0a0a0;
+  background-color: #F9F9F9;
+  padding: 3px 4px;
 }
 
 .movie__button {
@@ -63,19 +65,26 @@
 }
 
 .movie__button_type_save {
-  background-image: url(../../images/button__save-movie.png);
+  background-image: url(../../images/button__save-movie.svg);
   width: 72px;
   height: 21px;
+  border-radius: 30px;
   display: block;
+  background-color: #F9F9F9;
+}
+
+.movie__button_type_save:hover{
+  cursor: pointer;
+  opacity: .8;
 }
 
 .movie__button_type_save_active {
-  background-image: url(../../images/button__save-movie_active.png);
+  background-image: url(../../images/button__save-movie_active.svg);
   display: block;
 }
 
 .movie__button_type_delete{
-  background-image: url(../../images/button__delete-movie.png);
+  background-image: url(../../images/button__delete-movie.svg);
 }
 
 .movie_.movie__image .movie__button .movie__button_type_save {

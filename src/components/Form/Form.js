@@ -51,7 +51,7 @@ function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
           <span className="form__error"></span>
         </label>
         <button
-          className={`form__submit-button app__link
+          className={`form__submit-button form__submit-button_link
             ${type === "signin" && "form__login-button"}
           `}
           type="submit"
@@ -60,7 +60,7 @@ function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
         </button>
         <p className="form__subtitle">
           {subtitle}
-          <Link to={linkTo} className="form__link app__link">
+          <Link to={linkTo} className="form__link">
             {linkName}
           </Link>
         </p>

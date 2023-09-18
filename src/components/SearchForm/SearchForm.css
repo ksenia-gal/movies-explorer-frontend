@@ -1,9 +1,10 @@
 .search {
   display: flex;
   flex-direction: column;
-  padding: 70px 70px 70px;
-  background-color: #FDFDFD;
-  max-width: 1280px;
+  padding: 70px 0;
+  background-color: #FFF;
+  margin: 0 70px;
+  max-width: 1140px;
   border-bottom: 1px solid rgba(170, 170, 170, .2);
 }
 
@@ -66,6 +67,11 @@
   background-color: transparent;
   border: none;
   box-sizing: border-box;
+}
+
+.search__button:hover{
+  cursor: pointer;
+  opacity: .8;
 }
 
 .search__button:disabled {
@@ -196,13 +202,14 @@
 
 @media screen and (max-width: 1240px) {
   .search {
-    padding: 70px 30px;
+    padding: 70px 0;
+    margin: 0 30px;
   }
 }
 
 @media screen and (max-width: 879px) {
   .search {
-    padding: 80px 30px 109px;
+    padding: 80px 0 109px;
     gap: 110px;
   }
 
@@ -224,8 +231,9 @@
 
 @media screen and (max-width: 519px) {
   .search {
-    padding: 80px 10px 45px;
+    padding: 80px 0 45px;
     gap: 45px;
+    margin: 0 10px;
   }
 
   .search-form {

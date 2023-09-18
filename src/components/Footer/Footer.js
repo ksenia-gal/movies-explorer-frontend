@@ -18,10 +18,10 @@ function Footer() {
           <p className='footer__year'> &copy; 2023</p>
           <ul className='footer__links'>
             <li className='footer__item'>
-              <a className='footer__link app__link-external' href='https://praktikum.yandex.ru' rel='noopener noreferrer' target='_blank'>Яндекс.Практикум</a>
+              <a className='footer__link footer__link_external' href='https://praktikum.yandex.ru' rel='noopener noreferrer' target='_blank'>Яндекс.Практикум</a>
             </li>
             <li className='footer__item'>
-              <a className='footer__link app__link-external' href='https://github.com/ksenia-gal' rel='noopener noreferrer' target='_blank'>Github</a>
+              <a className='footer__link footer__link_external' href='https://github.com/ksenia-gal' rel='noopener noreferrer' target='_blank'>Github</a>
             </li>
           </ul>
         </div>

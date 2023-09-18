@@ -5,9 +5,9 @@ import React from "react";
 
 function MoviesCardList({ movies }) {
   return (
-    <section className="movies__cardlist">
+    <section className="movies-cardlist">
       <>
-        <ul className="movies__cardlist__container">
+        <div className="movies-cardlist__container">
           {movies.map((movie) => (
             <MoviesCard
               key={movie.title}
@@ -16,9 +16,9 @@ function MoviesCardList({ movies }) {
               image={movie.image}
             />
           ))}
-        </ul>
+        </div>
         <button
-          className="movies__cardlist__button_type_more"
+          className="movies-cardlist__button"
           type="button"
           aria-label="Показать еще"
         >

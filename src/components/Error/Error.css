@@ -38,7 +38,7 @@
     font-weight: 400;
     line-height: 20px;
     color: #000;
-    transition: .2 all ease;
+    /* transition: .2 all ease; */
   }
   
   .error__link:hover {

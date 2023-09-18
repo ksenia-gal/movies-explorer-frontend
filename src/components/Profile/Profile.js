@@ -46,7 +46,7 @@ function Profile() {
           </fieldset>
           {isInputActive ? (
             <button
-              className={`profile__button profile__button_type_submit app__link`}
+              className={`profile__button profile__button_type_submit profile__link`}
               type='submit'
             >
               Сохранить
@@ -54,14 +54,14 @@ function Profile() {
           ) : (
             <>
             <button
-              className={`profile__button profile__button_type_edit app__link`}
+              className={`profile__button profile__button_type_edit profile__link`}
               type='button'
               onClick={handleEditClick}
             >
               Редактировать
             </button>
             <button
-              className='profile__button profile__button_type_logout app__link'
+              className='profile__button profile__button_type_logout profile__link'
               type='button'
             >
               Выйти из аккаунта

@@ -108,8 +108,12 @@
 }
 
 .profile__link {
-  color: #ff4062;
-  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
 }
 
 .profile__input:focus {

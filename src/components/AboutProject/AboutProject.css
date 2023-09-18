@@ -1,11 +1,27 @@
 @import url(../Main/Main.css);
 
+.project {
+  box-sizing: border-box;
+  padding: 110px 70px;
+}
+
 .project__content {
   display: flex;
   justify-content: space-between;
   gap: 44px;
   margin: 72px 0 110px;
   color: #000;
+}
+
+.project__title{
+  font-weight: 400;
+  font-size: 22px;
+  line-height: normal;
+  margin: 0;
+  padding: 0 0 23px;
+  border-bottom: 1px solid #000;
+  position: relative;
+  z-index: 1;
 }
 
 .project__subtitle {
@@ -57,7 +73,17 @@
   align-items: flex-end;
 }
 
+@media screen and (max-width: 1024px){
+  .project {
+    padding: 110px 20px;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .project {
+    padding: 90px 50px;
+  }
+  
   .project__content {
     gap: 35px;
     margin-bottom: 93px;
@@ -81,6 +107,10 @@
 }
 
 @media screen and (max-width: 650px) {
+  .project {
+    padding: 70px 0;
+  }
+
   .project__content {
     margin: 60px 0 5px;
     flex-direction: column;
@@ -112,5 +142,18 @@
   .project__timeline {
     grid-template-columns: minmax(100px, 1fr) 4fr;
     grid-template-rows: 35px 23px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .project {
+    padding: 70px 18px 69px;
+  }
+
+  .project__title{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    padding: 0 0 28px;
   }
 }

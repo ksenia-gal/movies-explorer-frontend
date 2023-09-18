@@ -1,7 +1,7 @@
 .footer{
   width: 100%;
   padding: 80px 70px 20px;
-  margin-top: auto 70px;
+  margin-top: auto;
   box-sizing: border-box;
   color: #000;
 }
@@ -48,6 +48,17 @@
   color: #000;
 }
 
+.footer__link_external {
+  text-decoration: none;
+  transition: color .3s ease-in;
+  color: #000;
+}
+
+.footer__link_external:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .footer__item{
  margin: 0 20px 0 0;
 }
@@ -70,7 +81,7 @@
 
 @media screen and (max-width: 425px){
   .footer {
-    padding: 149px 0 10px;
+    padding: 92px 0 10px;
   }
 
   .footer__title{
