@@ -41,11 +41,12 @@
   box-sizing: border-box;
   background-color: #f9f9f9;
   border: none;
+  border-bottom: none;
   width: 100%;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  padding: 29px 0 0;
+  padding: 15px;
   margin-top: 10px;
 }
 
@@ -54,9 +55,9 @@
   border-bottom: 1px solid #000;
 }
 
-.form__input:invalid {
+/* .form__input:invalid {
   color: #ff4062;
-}
+} */
 
 .form__error {
   font-weight: 400;

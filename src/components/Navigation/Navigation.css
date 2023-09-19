@@ -219,4 +219,9 @@
   .menu__button_type_close {
     padding: 18px;
   }
+
+  .menu__button_opened {
+    width: 40px; 
+    height: 43px;
+  }
 }

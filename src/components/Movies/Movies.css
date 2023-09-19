@@ -1,21 +1,27 @@
 .movies{
-    box-sizing: border-box;
-    width: 100%;
+    width: calc(100% - 140px);
+    margin: 0 auto;
     padding: 0;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     background-color: #FFF;
+    box-sizing: border-box;
   }
   
-  @media screen and (max-width: 1023px){
+  @media screen and (max-width: 1276px){
     .movies{
-      padding: 0 20px;
+      width: calc(100% - 100px);
     }
   }
 
-  @media screen and (max-width: 930px){
+  @media screen and (max-width: 810px){
     .movies{
-      padding: 0;
+      width: calc(100% - 60px);
+    }
+  }
+
+  @media screen and (max-width: 425px){
+    .movies{
+      width: calc(100% - 20px);
     }
   }
