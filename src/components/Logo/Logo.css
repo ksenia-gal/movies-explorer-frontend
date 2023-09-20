@@ -1,0 +1,13 @@
+.logo{
+    height: 38px;
+    width: 38px;
+  }
+
+  .logo__link{
+     display: inline-block;
+     transition: transform .3s ease-in;
+  }
+  
+  .logo__link:hover{
+    transform: scale(1.1);
+  }

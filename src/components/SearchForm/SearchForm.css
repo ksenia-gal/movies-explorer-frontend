@@ -1,0 +1,267 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  padding: 70px 0;
+  background-color: #fff;
+  margin: 0;
+  max-width: 1140px;
+  border-bottom: 1px solid rgba(170, 170, 170, 0.2);
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0;
+  border-radius: 9px;
+  margin: 0;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  background-color: #fdfdfd;
+}
+
+.search__fields {
+  display: flex;
+  align-items: center;
+  padding: 19px;
+  border: none;
+  margin: 0;
+}
+
+.search__label {
+  margin: 0;
+  background-image: url("../../images/icon__search.svg");
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 6px;
+  padding-right: 9px;
+  width: 34px;
+  aspect-ratio: 1 / 1;
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+}
+
+.search__input::placeholder {
+  color: #a0a0a0;
+}
+
+.search__button {
+  width: 100%;
+  max-width: 80px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  background-image: url("../../images/search__button.svg");
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+}
+
+.search__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.search__button:disabled {
+  filter: grayscale(1);
+}
+
+.search__fields_type_film {
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.search__fields_type_film::after {
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  bottom: 16px;
+  width: 1px;
+  background-color: #e8e8e8;
+  content: "";
+}
+
+.search__fields_type_shorts {
+  padding-right: 30px;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.search-form__error {
+  display: block;
+  height: 25px;
+  box-sizing: border-box;
+  padding: 10px 0 0;
+  margin: 0;
+  color: #ee3465;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: pre;
+}
+
+.search__filter-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.search__filter-name {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.search__filter {
+  width: 36px;
+  height: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 20px;
+  padding: 6px;
+  position: relative;
+  background-color: #c4c4c4;
+}
+
+.search__filter_active {
+  background-color: #2be080;
+}
+
+.search__filter:hover .search__switch {
+  transform: scale(1.7);
+}
+
+.search__radio {
+  position: absolute;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  width: 50px;
+  opacity: 0;
+  z-index: 3;
+}
+
+.search__radio:hover {
+  cursor: pointer;
+}
+
+.search__switch {
+  box-sizing: border-box;
+  height: 8px;
+  width: 8px;
+  background-color: #ebebeb;
+  border-radius: 50%;
+  position: relative;
+  left: 0;
+  z-index: 2;
+  transition: transform 0.3s ease-in;
+}
+
+.search__filter_active {
+  background-color: #2be080;
+}
+
+.search__filter:hover .search__switch {
+  transform: scale(1.7);
+}
+
+.search__filter_active .search__switch {
+  left: 16px;
+  background-color: #fff;
+}
+
+.search__filter_active .search__radio_on {
+  z-index: 1;
+  background-color: #2be080;
+}
+
+@media screen and (max-width: 1240px) {
+  .search {
+    padding: 70px 0;
+  }
+}
+
+@media screen and (max-width: 879px) {
+  .search {
+    padding: 80px 0 109px;
+    gap: 110px;
+  }
+
+  .search__fields_type_film {
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search__fields_type_shorts {
+    padding-right: 20px;
+  }
+
+  .search__fields_type_film::after {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .search {
+    padding: 80px 0 45px;
+    gap: 45px;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+    box-shadow: none;
+  }
+
+  .search__label {
+    display: none;
+  }
+
+  .search__input {
+    font-size: 14px;
+  }
+
+  .search__fields_type_shorts {
+    padding: 0;
+    gap: 14px;
+  }
+
+  .search__filter-name {
+    font-size: 11px;
+  }
+
+  .search__fields_type_film {
+    height: 72px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .search__fields_type_film::after {
+    display: none;
+  }
+}
