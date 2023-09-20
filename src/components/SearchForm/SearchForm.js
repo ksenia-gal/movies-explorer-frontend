@@ -32,7 +32,7 @@ function SearchForm() {
           </fieldset>
           <fieldset className="search__fields search__fields_type_shorts">
           <div className='search__filter-box'>
-          <label className={`search__filter
+          <div className={`search__filter
             ${shortFilms === 'on' ? 'search__filter_active' : ''}`
           }>
             <input className='search__radio search__radio_off'
@@ -50,7 +50,7 @@ function SearchForm() {
               onChange={onCheckbox}
             />
             <span className='search__switch'></span>
-          </label>
+          </div>
           <p className='search__filter-name'>Короткометражки</p>
         </div>
           </fieldset>
