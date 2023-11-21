@@ -2,7 +2,7 @@ import './Register.css';
 import Form from '../Form/Form';
 
 
-function Register(){
+function Register({ onRegister, infoMessage }){
 
   return (
     <Form
@@ -12,6 +12,8 @@ function Register(){
       buttonName='Зарегистрироваться'
       subtitle='Уже зарегистрированы?'
       linkName='Войти'
+      onSubmit={onRegister}
+      infoMessage={infoMessage}
     >
     </Form>
   );

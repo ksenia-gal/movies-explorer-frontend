@@ -5,6 +5,23 @@
   align-items: center;
 }
 
+.movies-cardlist__message{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  max-width: 380px;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.movies-cardlist__message_type_error{
+  color: #FF004C;
+}
+
 .movies-cardlist__container {
   width: 100%;
   margin: 80px auto 30px;
