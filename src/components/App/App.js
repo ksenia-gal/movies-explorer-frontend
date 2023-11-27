@@ -83,7 +83,7 @@ function App() {
       .then((data) => {
         if (data) {
           console.log(data);
-          handleLogin(data.email, password);
+          handleLogin(email, password);
         }
       })
       .catch(({ message, statusCode }) => {
