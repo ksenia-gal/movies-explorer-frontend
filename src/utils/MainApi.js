@@ -26,7 +26,7 @@ class MainApi {
       headers: {
         authorization: this._token,
       },
-      credentials: 'true',
+      credentials: 'include',
     });
     return response;
   };
@@ -38,7 +38,7 @@ class MainApi {
         'Content-Type': 'application/json',
         authorization: `Bearer ${this._token}`,
       },
-      credentials: 'true',
+      credentials: 'include',
       body: JSON.stringify({
         name,
         email,
@@ -52,7 +52,7 @@ class MainApi {
       headers: {
         authorization: this._token,
       },
-      credentials: 'true',
+      credentials: 'include',
     })
     return response;
   };
@@ -77,7 +77,7 @@ class MainApi {
         'Content-Type': 'application/json',
         authorization: `Bearer ${this._token}`,
       },
-      credentials: 'true',
+      credentials: 'include',
       body: JSON.stringify({
         country: country || 'no country',
         director,
@@ -102,7 +102,7 @@ class MainApi {
       headers: {
         authorization: `Bearer ${this._token}`,
       },
-      credentials: 'true',
+      credentials: 'include',
     })
     return response;
   };
@@ -111,7 +111,7 @@ class MainApi {
   async register(name, email, password) {
     const response = await this._request('signup', {
       method: 'POST',
-      credentials: 'true',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ class MainApi {
   async login(email, password) {
   const response = await this._request('signin', {
     method: 'POST',
-    credentials: 'true',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ class MainApi {
   async signout() {
     const response = await this._request('signout', {
       method: 'POST',
-      credentials: 'true',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ class MainApi {
   async checkToken() {
   const res = await this._request("users/me",  {
     method: "GET",
-    credentials: 'true',
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
       authorization: this._token,
