@@ -52,7 +52,7 @@ function App() {
     setIsLoading(true);
     mainApi
       .getUserInfo()
-      .then((data) => {
+      .then(data => {
         setIsLoggedIn(true);
         setCurrentUser(data);
       })
@@ -80,7 +80,7 @@ function App() {
   function handleRegister(name, email, password) {
     mainApi
       .register(name, email, password)
-      .then((data) => {
+      .then(data => {
         if (data) {
           console.log(data);
           handleLogin(email, password);
@@ -92,7 +92,7 @@ function App() {
           message,
           isShown: true,
           code: statusCode,
-          type: "register",
+          messageType: "register",
         });
       });
   }
@@ -101,7 +101,7 @@ function App() {
     setIsLoading(true);
     mainApi
       .login(email, password)
-      .then((res) => {
+      .then(res => {
         setIsLoggedIn(true);
         navigate("/movies", { replace: true });
       })
@@ -111,7 +111,7 @@ function App() {
           message,
           isShown: true,
           code: statusCode,
-          type: "login",
+          messageType: "login",
         });
       })
       .finally(() => setIsLoading(false));
@@ -147,7 +147,7 @@ function App() {
           message,
           isShown: true,
           code: statusCode,
-          type: "profile",
+          messageType: "profile",
         });
       });
   }
@@ -158,7 +158,7 @@ function App() {
         ...infoMessage,
         message: "",
         isShown: false,
-        type: "",
+        messageType: "",
         code: OK,
       });
     }
