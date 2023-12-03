@@ -29,8 +29,8 @@ function Form({ type, linkTo, linkName, title, subtitle, buttonName, onSubmit, i
               type="text"
               className="form__input"
               name="name"
-              min="2"
-              max="30"
+              minLength="2"
+              maxLength="30"
               required
               value={values.name || ''}
               onChange={handleChange}
@@ -47,9 +47,10 @@ function Form({ type, linkTo, linkName, title, subtitle, buttonName, onSubmit, i
             type="email"
             className="form__input"
             name="email"
-            min="2"
-            max="30"
+            minLength="2"
+            maxLength="30"
             required
+            pattern='^.+@.+\..+$'
             value={values.email || ''}
             onChange={handleChange}
           />
@@ -64,8 +65,8 @@ function Form({ type, linkTo, linkName, title, subtitle, buttonName, onSubmit, i
             type="password"
             className="form__input"
             name="password"
-            min="4"
-            max="12"
+            minLength="4"
+            maxLength="12"
             required
             value={values.password || ''}
             onChange={handleChange}

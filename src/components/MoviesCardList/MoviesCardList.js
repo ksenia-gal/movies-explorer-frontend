@@ -27,7 +27,7 @@ function MoviesCardList({
     if (width > 1280) {
       setMoviesShownNumber({ default: 8, more: 4 });
     } else if (width > 1024) {
-      setMoviesShownNumber({ default: 12, more: 4 });
+      setMoviesShownNumber({ default: 12, more: 3 });
     } else if (width > 770) {
       setMoviesShownNumber({ default: 8, more: 2 });
     } else if (width <= 770) {

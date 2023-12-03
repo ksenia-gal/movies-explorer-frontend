@@ -52,7 +52,7 @@ function App() {
     setIsLoading(true);
     mainApi
       .getUserInfo()
-      .then(data => {
+      .then((data) => {
         setIsLoggedIn(true);
         setCurrentUser(data);
       })
@@ -80,7 +80,7 @@ function App() {
   function handleRegister(name, email, password) {
     mainApi
       .register(name, email, password)
-      .then(data => {
+      .then((data) => {
         if (data) {
           console.log(data);
           handleLogin(email, password);
@@ -101,7 +101,7 @@ function App() {
     setIsLoading(true);
     mainApi
       .login(email, password)
-      .then(res => {
+      .then((res) => {
         setIsLoggedIn(true);
         navigate("/movies", { replace: true });
       })
@@ -121,8 +121,9 @@ function App() {
     mainApi
       .signout()
       .then((res) => {
-        localStorage.removeItem("jwt");
+        setCurrentUser({});
         setIsLoggedIn(false);
+        localStorage.clear();
         navigate("/", { replace: true });
       })
       .catch((err) => {
@@ -187,84 +188,87 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div
-        className="app"
-        onClick={infoMessage.isShown ? handleResetInfoMessage : null}
-      >
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <>
-            <Header isLoggedIn={isLoggedIn} />
-            <Routes>
-              <Route
-                path="/movies"
-                element={
-                  <ProtectedRoute
-                    element={Movies}
-                    isLoggedIn={isLoggedIn}
-                    savedMoviesList={savedMovies}
-                    onLikeClick={handleSaveMovie}
-                    onDeleteClick={handleDeleteMovie}
-                  />
-                }
-              />
-              <Route
-                path="/saved-movies"
-                element={
-                  <ProtectedRoute
-                    element={SavedMovies}
-                    isLoggedIn={isLoggedIn}
-                    list={savedMovies}
-                    onDeleteClick={handleDeleteMovie}
-                    isError={isError}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute
-                    element={Profile}
-                    isLoggedIn={isLoggedIn}
-                    onSignOut={handleSignOut}
-                    onUpdate={handleUpdateUserData}
-                    infoMessage={infoMessage}
-                  />
-                }
-              />
-              <Route path="/" element={<Main />} />
-              <Route
-                path="/signup"
-                element={
-                  isLoggedIn ? (
-                    <Navigate to="/movies" />
-                  ) : (
-                    <Register
-                      onRegister={handleRegister}
+      <div className="root">
+        <div
+          className="app"
+          onClick={infoMessage.isShown ? handleResetInfoMessage : null}
+        >
+          {isLoading ? (
+            <Preloader />
+          ) : (
+            <>
+              <Header isLoggedIn={isLoggedIn} />
+              <Routes>
+                <Route
+                  exact
+                  path="/movies"
+                  element={
+                    <ProtectedRoute
+                      element={Movies}
+                      isLoggedIn={isLoggedIn}
+                      savedMoviesList={savedMovies}
+                      onLikeClick={handleSaveMovie}
+                      onDeleteClick={handleDeleteMovie}
+                    />
+                  }
+                />
+                <Route
+                  path="/saved-movies"
+                  element={
+                    <ProtectedRoute
+                      element={SavedMovies}
+                      isLoggedIn={isLoggedIn}
+                      list={savedMovies}
+                      onDeleteClick={handleDeleteMovie}
+                      isError={isError}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute
+                      element={Profile}
+                      isLoggedIn={isLoggedIn}
+                      onSignOut={handleSignOut}
+                      onUpdate={handleUpdateUserData}
                       infoMessage={infoMessage}
                     />
-                  )
-                }
-              />
-              <Route
-                path="/signin"
-                element={
-                  isLoggedIn ? (
-                    <Navigate to="/movies" />
-                  ) : (
-                    <Login onLogin={handleLogin} infoMessage={infoMessage} />
-                  )
-                }
-              />
-              <Route
-                path="*"
-                element={<Error message="Страница не найдена" status="404" />}
-              />
-            </Routes>
-            <Footer />
-          </>
-        )}
+                  }
+                />
+                <Route path="/" element={<Main />} />
+                <Route
+                  path="/signup"
+                  element={
+                    isLoggedIn ? (
+                      <Navigate to="/movies" />
+                    ) : (
+                      <Register
+                        onRegister={handleRegister}
+                        infoMessage={infoMessage}
+                      />
+                    )
+                  }
+                />
+                <Route
+                  path="/signin"
+                  element={
+                    isLoggedIn ? (
+                      <Navigate to="/movies" />
+                    ) : (
+                      <Login onLogin={handleLogin} infoMessage={infoMessage} />
+                    )
+                  }
+                />
+                <Route
+                  path="*"
+                  element={<Error message="Страница не найдена" status="404" />}
+                />
+              </Routes>
+              <Footer />
+            </>
+          )}
+        </div>
       </div>
     </CurrentUserContext.Provider>
   );

@@ -16,6 +16,8 @@ function handleShortMovies(evt) {
 
 function handleSearchSubmit(value) {
   setSearchQuery(value);
+  const resultList = filterMovies(list, searchQuery, shortMovies);
+    setFilteredMovies(resultList);
 };
 
 React.useEffect(() => {
@@ -39,7 +41,7 @@ React.useEffect(() => {
       list={filteredMovies}
       savedMoviesPage={true}
       onDelete={onDeleteClick}
-      isEmptyList={notFoundMovies}
+      isEmptyList={notFoundMovies || filteredMovies.length === 0}
       isError={isError}
       />
     </section>

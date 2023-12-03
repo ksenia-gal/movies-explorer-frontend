@@ -7,7 +7,7 @@ function Error({ status, message }) {
     const navigate = useNavigate();
 
   function handleClick() {
-    navigate.goBack();
+    navigate(-1);
   };
 
     return (
