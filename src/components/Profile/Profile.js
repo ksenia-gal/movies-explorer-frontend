@@ -4,7 +4,7 @@ import InfoMessage from "../InfoMessage/InfoMessage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Profile({ onSignOut, onUpdate, infoMessage }) {
+function Profile({ onSignOut, onUpdate, infoMessage, setSearchQuery, setShortMoviesFilter }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { handleChange, setValues, setIsValid, values, isValid, errors } =
     useFormWithValidation();

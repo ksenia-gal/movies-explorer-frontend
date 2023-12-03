@@ -123,6 +123,9 @@ function App() {
       .then((res) => {
         setCurrentUser({});
         setIsLoggedIn(false);
+        setSavedMovies([]);
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
         localStorage.clear();
         navigate("/", { replace: true });
       })
