@@ -4,6 +4,7 @@ import Preloader from "../Preloader/Preloader";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { getSavedMovieById } from "../../utils/utils";
 import { useScreenWidth } from "../../hooks/useScreenWidth";
+import { WINDOW_WIDTH } from "../../utils/constants";
 
 function MoviesCardList({
   isLoading,
@@ -24,13 +25,11 @@ function MoviesCardList({
   const [isMounted, setMounted] = React.useState(true);
 
   React.useEffect(() => {
-    if (width > 1280) {
-      setMoviesShownNumber({ default: 8, more: 4 });
-    } else if (width > 1024) {
+    if (width >= WINDOW_WIDTH.DESCTOP) {
       setMoviesShownNumber({ default: 12, more: 3 });
-    } else if (width > 770) {
+    } else if (width >= WINDOW_WIDTH.TABLET) {
       setMoviesShownNumber({ default: 8, more: 2 });
-    } else if (width <= 770) {
+    } else if (width <= WINDOW_WIDTH.MOBILE) {
       setMoviesShownNumber({ default: 5, more: 2 });
     }
     return () => setMounted(false);

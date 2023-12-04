@@ -7,10 +7,11 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 function Form({ type, linkTo, linkName, title, subtitle, buttonName, onSubmit, infoMessage }) {
 
-  const {values, errors, isValid, handleChange} = useFormWithValidation();
+  const {values, errors, setIsValid, isValid, handleChange} = useFormWithValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    setIsValid(false)
     type === 'signup'
       ? onSubmit(values.name, values.email, values.password)
       : onSubmit(values.email, values.password);

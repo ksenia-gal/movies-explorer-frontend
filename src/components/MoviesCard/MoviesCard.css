@@ -93,11 +93,11 @@
   }
 
   .movie {
-    width: 339px;
+    width: 100%;
   }
 
   .movie__image {
-    /* width: 339px; */
+    width: 100%;
     height: 190px;
   }
 

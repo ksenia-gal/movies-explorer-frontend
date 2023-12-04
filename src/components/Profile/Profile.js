@@ -4,11 +4,16 @@ import InfoMessage from "../InfoMessage/InfoMessage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Profile({ onSignOut, onUpdate, infoMessage, setSearchQuery, setShortMoviesFilter }) {
+function Profile({
+  onSignOut,
+  onUpdate,
+  infoMessage,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
   const { handleChange, setValues, setIsValid, values, isValid, errors } =
     useFormWithValidation();
   const [isInputActive, setIsInputActive] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   React.useEffect(() => {
     setValues({
@@ -19,21 +24,26 @@ function Profile({ onSignOut, onUpdate, infoMessage, setSearchQuery, setShortMov
 
   React.useEffect(() => {
     if (
-      values.name === currentUser.name  &&
-      values.email === currentUser.email
+      isSubmitting ||
+      (values.name === currentUser.name && values.email === currentUser.email)
     ) {
       setIsValid(false);
     }
-  }, [setIsValid, values, currentUser]);
+  }, [isSubmitting, setIsValid, values, currentUser]);
 
   React.useEffect(() => {
     if (infoMessage.isShown && infoMessage.code === 200) {
       setIsInputActive(false);
+      setIsSubmitting(false);
     }
   }, [setIsInputActive, infoMessage.isShown, infoMessage.code]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (isSubmitting) {
+      return;
+    }
+    setIsSubmitting(true);
     onUpdate(values.name, values.email);
   }
 
