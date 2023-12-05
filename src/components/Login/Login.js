@@ -1,7 +1,7 @@
 import './Login.css';
 import Form from "../Form/Form";
 
-function Login(){
+function Login({ onLogin, infoMessage }){
   return (
     <Form
       type='signin'
@@ -10,6 +10,8 @@ function Login(){
       buttonName='Войти'
       subtitle='Ещё не зарегистрированы?'
       linkName='Регистрация'
+      onSubmit={onLogin}
+      infoMessage={infoMessage}
     />
   );
 };

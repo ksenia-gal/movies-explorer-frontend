@@ -1,37 +1,49 @@
+import React from 'react';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import React from 'react';
+import { filterMovies } from '../../utils/utils';
 
-import filmcover1 from '../../images/filmcover-1.png';
-import filmcover2 from '../../images/filmcover-2.png';
-import filmcover3 from '../../images/filmcover-3.png';
+function SavedMovies({ list, isError, onDeleteClick }) {
+const [searchQuery, setSearchQuery] = React.useState('');
+const [shortMovies, setShortMovies] = React.useState('off');
+const [filteredMovies, setFilteredMovies] = React.useState(list);
+const [notFoundMovies, setNotFoundMovies] = React.useState(false);
 
-const movies = [ 
+function handleShortMovies(evt) {
+  setShortMovies(evt.target.value);
+};
 
-  { 
-    title: "33 слова о дизайне", 
-    duration: "1ч 17м", 
-    image: filmcover1, 
-  }, 
-  { 
-    title: "Киноальманах «100 лет дизайна»", 
-    duration: '1ч 17м', 
-    image: filmcover2, 
-  },
-  { 
-    title: "В погоне за Бенкси", 
-    duration: '1ч 17м', 
-    image: filmcover3, 
-  },  
-]; 
+function handleSearchSubmit(value) {
+  setSearchQuery(value);
+  const resultList = filterMovies(list, searchQuery, shortMovies);
+    setFilteredMovies(resultList);
+};
 
-function SavedMovies() {
+React.useEffect(() => {
+  const searchResult = filterMovies(list, searchQuery, shortMovies);
+  setFilteredMovies(searchResult);
+  if (searchQuery) {
+    setNotFoundMovies(searchResult.length === 0);
+  }
+}, [searchQuery, shortMovies, list]);
+
 
   return (
     <section className='saved-movies'>
-      <SearchForm />
-      <MoviesCardList movies={movies} />
+      <SearchForm 
+      onSearch={handleSearchSubmit}
+      onCheckbox={handleShortMovies}
+      shortMovies={shortMovies}
+      savedMoviesPage={true}
+      />
+      <MoviesCardList 
+      list={filteredMovies}
+      savedMoviesPage={true}
+      onDelete={onDeleteClick}
+      isEmptyList={notFoundMovies || filteredMovies.length === 0}
+      isError={isError}
+      />
     </section>
   );
 };

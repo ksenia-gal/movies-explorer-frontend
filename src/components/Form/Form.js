@@ -2,13 +2,26 @@ import "./Form.css";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import React from "react";
+import InfoMessage from '../InfoMessage/InfoMessage';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
+function Form({ type, linkTo, linkName, title, subtitle, buttonName, onSubmit, infoMessage }) {
+
+  const {values, errors, setIsValid, isValid, handleChange} = useFormWithValidation();
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    setIsValid(false)
+    type === 'signup'
+      ? onSubmit(values.name, values.email, values.password)
+      : onSubmit(values.email, values.password);
+  };
+
   return (
     <section className="form">
       <Logo />
       <h2 className="form__title">{title}</h2>
-      <form className="form__container">
+      <form className="form__container" onSubmit={handleSubmit}>
         {type === "signup" && (
           <label className="form__label">
             Имя
@@ -17,11 +30,15 @@ function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
               type="text"
               className="form__input"
               name="name"
-              min="2"
-              max="30"
+              minLength="2"
+              maxLength="30"
               required
+              value={values.name || ''}
+              onChange={handleChange}
             />
-            <span className="form__error"></span>
+            <span className="form__error">
+            {errors.name ? `Поле должно быть заполнено` : ''}
+            </span>
           </label>
         )}
         <label className="form__label">
@@ -31,11 +48,16 @@ function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
             type="email"
             className="form__input"
             name="email"
-            min="2"
-            max="30"
+            minLength="2"
+            maxLength="30"
             required
+            pattern='^.+@.+\..+$'
+            value={values.email || ''}
+            onChange={handleChange}
           />
-          <span className="form__error"></span>
+          <span className="form__error">
+          {errors.email || ''}
+          </span>
         </label>
         <label className="form__label">
           Пароль
@@ -44,17 +66,23 @@ function Form({ type, linkTo, title, buttonName, subtitle, linkName }) {
             type="password"
             className="form__input"
             name="password"
-            min="4"
-            max="12"
+            minLength="4"
+            maxLength="12"
             required
+            value={values.password || ''}
+            onChange={handleChange}
           />
-          <span className="form__error"></span>
+          <span className="form__error">
+          {errors.password || ''}
+          </span>
         </label>
+        <InfoMessage {...infoMessage} />
         <button
           className={`form__submit-button form__submit-button_link
-            ${type === "signin" && "form__login-button"}
+            ${type === "signup" && "form__login-button"}
           `}
           type="submit"
+          disabled={!isValid}
         >
           {buttonName}
         </button>

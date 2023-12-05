@@ -1,93 +1,116 @@
-import './Movies.css';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import React from 'react';
-import filmcover1 from '../../images/filmcover-1.png';
-import filmcover2 from '../../images/filmcover-2.png';
-import filmcover3 from '../../images/filmcover-3.png';
-import filmcover4 from '../../images/filmcover-4.png';
-import filmcover5 from '../../images/filmcover-5.png';
-import filmcover6 from '../../images/filmcover-6.png';
-import filmcover7 from '../../images/filmcover-7.png';
-import filmcover8 from '../../images/filmcover-8.png';
-import filmcover9 from '../../images/filmcover-9.png';
-import filmcover10 from '../../images/filmcover-10.png';
-import filmcover11 from '../../images/filmcover-11.png';
-import filmcover12 from '../../images/filmcover-12.png';
+import "./Movies.css";
+import React from "react";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import * as moviesApi from "../../utils/MoviesApi";
+import {
+  findShortMoviesOnly,
+  filterMovies,
+} from "../../utils/utils";
 
-const movies = [ 
+function Movies({ onLikeClick, onDeleteClick, savedMoviesList }) {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+  const [shortMoviesFilter, setShortMoviesFilter] = React.useState(
+    localStorage.getItem("shortMovies") === "on" ? "on" : "off"
+  );
+  const [allMovies, setAllMovies] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [notFoundMovies, setNotFoundMovies] = React.useState(false);
 
-  { 
-    title: "33 слова о дизайне", 
-    duration: "1ч 17м", 
-    image: filmcover1, 
-  }, 
-  { 
-    title: "Киноальманах «100 лет дизайна»", 
-    duration: '1ч 17м', 
-    image: filmcover2, 
-  },
-  { 
-    title: "В погоне за Бенкси", 
-    duration: '1ч 17м', 
-    image: filmcover3, 
-  },  
-  { 
-    title: "Баския: Взрыв реальности", 
-    duration: '1ч 17м', 
-    image: filmcover4, 
-  }, 
-  { 
-    title: "Бег это свобода", 
-    duration: '1ч 17м',
-    image: filmcover5, 
-  }, 
-  { 
-    title: "Книготорговцы", 
-    duration: '1ч 17м',
-    image: filmcover6, 
-  }, 
-  { 
-    title: "Когда я думаю о Германии ночью", 
-    duration: '1ч 17м', 
-    image: filmcover7, 
-  }, 
-  { 
-    title: "Gimme Danger: История Игги и The Stooges", 
-    duration: '1ч 17м', 
-    image: filmcover8, 
-  }, 
-  { 
-    title: "Дженис: Маленькая девочка грустит", 
-    duration: '1ч 17м',
-    image: filmcover9, 
-  }, 
-  { 
-    title: "Соберись перед прыжком", 
-    duration: '1ч 17м',
-    image: filmcover10, 
-  }, 
-  { 
-    title: "Пи Джей Харви: A dog called money", 
-    duration: '1ч 17м',
-    image: filmcover11, 
-  }, 
-  { 
-    title: "По волнам: Искусство звука в кино", 
-    duration: '1ч 17м',
-    image: filmcover12, 
-  }, 
-]; 
+  React.useEffect(() => {
+    const moviesFromLocalStorage = JSON.parse(localStorage.getItem("movies"));
+    if (moviesFromLocalStorage && !searchQuery) {
+      setShortMoviesFilter(localStorage.getItem("shortMovies"));
+      const filteredMoviesFromLocalStorage = shortMoviesFilter === 'on' ? findShortMoviesOnly(moviesFromLocalStorage) : moviesFromLocalStorage;
+      setFilteredMovies(filteredMoviesFromLocalStorage);
+      checkFilteredMovies(filteredMoviesFromLocalStorage);
+    }
+  }, [shortMoviesFilter, searchQuery]);
 
-function Movies() {
+  React.useEffect(() => {
+    if (searchQuery) {
+      const newFilteredMovies = filterMovies(
+        allMovies,
+        searchQuery,
+        shortMoviesFilter
+      );
+      setFilteredMovies(newFilteredMovies);
+      checkFilteredMovies(newFilteredMovies);
+    }
+  }, [searchQuery, shortMoviesFilter, allMovies]);
+
+  function setMovieImages(movies) {
+    movies.forEach(movie => {
+      if(!movie.image){
+        movie.image = 'https://img2.freepng.ru/20180705/cf/kisspng-film-cinema-5b3dc8ff9cf1a0.6653088215307758076429.jpg';
+        movie.thumbnail = 'https://img2.freepng.ru/20180705/cf/kisspng-film-cinema-5b3dc8ff9cf1a0.6653088215307758076429.jpg'
+      } else {
+        movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
+        movie.image = `https://api.nomoreparties.co${movie.image.url}`
+      }
+    });
+  };
+    function handleSetFilteredMovies(movies, query, checkbox) {
+    const moviesList = filterMovies(movies, query);
+    setFilteredMovies(
+      checkbox === "on" ? findShortMoviesOnly(moviesList) : moviesList
+    );
+    localStorage.setItem("movies", JSON.stringify(moviesList));
+  }
+
+  function handleSearchSubmit(value) {
+    setIsLoading(true);
+    setSearchQuery(value);
+    localStorage.setItem("searchQuery", value);
+    localStorage.setItem("shortMovies", shortMoviesFilter);
+    if (!allMovies.length) {
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          setMovieImages(data);
+          setAllMovies(data);
+          handleSetFilteredMovies(data, value, shortMoviesFilter);
+        })
+        .catch((err) => {
+          setIsError(true);
+          console.log(err);
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      handleSetFilteredMovies(allMovies, value, shortMoviesFilter);
+      setIsLoading(false);
+    }
+  }
+
+  function handleShortMovies(evt) {
+    setShortMoviesFilter(evt.target.value);
+    localStorage.setItem("shortMovies", evt.target.value);
+  }
+
+  function checkFilteredMovies(arr) {
+    arr.length === 0 ? setNotFoundMovies(true) : setNotFoundMovies(false);
+  }
 
   return (
-    <section className='movies'>
+    <section className="movies">
       <SearchForm
+        onSearch={handleSearchSubmit}
+        onCheckbox={handleShortMovies}
+        shortMovies={shortMoviesFilter}
       />
-      <MoviesCardList movies={movies} />
+      <MoviesCardList
+        isLoading={isLoading}
+        isEmptyList={notFoundMovies}
+        isError={isError}
+        list={filteredMovies}
+        onLike={onLikeClick}
+        onDelete={onDeleteClick}
+        savedMovies={savedMoviesList}
+      />
     </section>
   );
 }
-  
+
 export default Movies;

@@ -4,10 +4,15 @@ import accountButton from "../../images/header__button.svg";
 import React, { useState } from "react";
 
 function Navigation({ isLoggedIn }) {
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMenuClose = () => {
+    setIsMenuOpen(false);
   };
 
   return (
@@ -27,10 +32,10 @@ function Navigation({ isLoggedIn }) {
           {isLoggedIn ? (
             <>
               <NavLink
-                exact
                 to="/"
                 activeclassname="menu__nav-link_active"
                 className="menu__nav-link"
+                onClick={handleMenuClose}
               >
                 Главная
               </NavLink>
@@ -38,6 +43,7 @@ function Navigation({ isLoggedIn }) {
                 to="/movies"
                 activeclassname="menu__nav-link_active"
                 className="menu__nav-link"
+                onClick={handleMenuClose}
               >
                 Фильмы
               </NavLink>
@@ -45,6 +51,7 @@ function Navigation({ isLoggedIn }) {
                 to="/saved-movies"
                 activeclassname="menu__nav-link_active"
                 className="menu__nav-link"
+                onClick={handleMenuClose}
               >
                 Сохраненные фильмы
               </NavLink>
@@ -60,7 +67,7 @@ function Navigation({ isLoggedIn }) {
             </>
           )}
           {isLoggedIn && (
-            <Link to="/profile" className="menu__account-button">
+            <Link to="/profile" className="menu__account-button" onClick={handleMenuClose}>
               <img src={accountButton} alt="Кнопка входа в аккаунт" />
             </Link>
           )}
